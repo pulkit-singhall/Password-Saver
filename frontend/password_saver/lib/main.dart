@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_saver/screens/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,11 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue.shade300,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('hello'),
-        ),
-      ),
+      home: const Register(),
     );
   }
 }
