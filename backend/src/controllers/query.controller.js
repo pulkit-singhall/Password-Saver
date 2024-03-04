@@ -44,7 +44,51 @@ const createQuery = asyncHandler(async (req, res) => {
 });
 
 const updateQuery = asyncHandler(async (req, res) => {
-    
+    const { queryId } = req.params;
+    const { answer, question } = req.body;
+
+    const query = await Query.findById(queryId);
+
+    if (!query) {
+        throw new ApiError(402, "Wrong Query ID");
+    }
+
+    const oldAnswer = query.answer;
+    const oldQuestion = query.question;
+
+    if (answer) {
+        oldAnswer = answer;
+    }
+    if (question) {
+        oldQuestion = question;
+    }
+
+    const updatedQuery = await Query.findByIdAndUpdate(
+        queryId,
+        {
+            $set: {
+                answer: oldAnswer,
+                question: oldQuestion,
+            },
+        },
+        {
+            new: true,
+        }
+    );
+
+    if (!updatedQuery) {
+        throw new ApiError(500, "Internal server error in updating the query");
+    }
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                { updatedQuery: updatedQuery },
+                "Query Updated"
+            )
+        );
 });
 
 const deleteQuery = asyncHandler(async (req, res) => {
