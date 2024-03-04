@@ -13,6 +13,7 @@ const querySchema = new mongoose.Schema(
         externalPassword: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Password",
+            required: true, 
         }
     },
     { timestamps: true }

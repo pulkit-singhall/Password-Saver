@@ -10,7 +10,9 @@ const loginUser = asyncHandler(async (req, res) => { });
 
 const logoutUser = asyncHandler(async (req, res) => { });
 
-const getCurrentUser = asyncHandler(async (req, res) => { });
+const getCurrentUser = asyncHandler(async (req, res) => {
+    
+});
 
 const changeUserPassword = asyncHandler(async (req, res) => { });
 
