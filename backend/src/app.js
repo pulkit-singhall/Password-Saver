@@ -12,8 +12,8 @@ const app = express();
 
 
 // routes
-app.use("api/v1/users", userRoute);
-app.use("api/v1/passwords", passwordRoute);
-app.use("api/v1/queries", queryRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/passwords", passwordRoute);
+app.use("/api/v1/queries", queryRoute);
 
 export default app;

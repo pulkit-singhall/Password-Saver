@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:password_saver/screens/login.dart';
-import 'package:password_saver/screens/register.dart';
+import 'package:password_saver/screens/dashboard.screen.dart';
+import 'package:password_saver/screens/login.screen.dart';
+import 'package:password_saver/screens/register.screen.dart';
 
 class Routes {
   static MaterialPageRoute registerRoute() {
@@ -12,6 +13,12 @@ class Routes {
   static MaterialPageRoute loginRoute() {
     return MaterialPageRoute(builder: (builder) {
       return const Login();
+    });
+  }
+
+  static MaterialPageRoute dashboardRoute() {
+    return MaterialPageRoute(builder: (builder) {
+      return const Dashboard();
     });
   }
 }

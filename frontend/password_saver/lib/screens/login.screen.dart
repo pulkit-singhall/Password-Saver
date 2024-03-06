@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:password_saver/widgets/views.dart';
+import 'package:password_saver/widgets/views.widgets.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<Login> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Login> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-  final TextEditingController fullname = TextEditingController();
   int isObscure = 1;
 
   @override
@@ -25,7 +24,7 @@ class _RegisterState extends State<Register> {
                 height: 70,
               ),
               const Text(
-                "Protect what protects\nyour data!",
+                "Welcome Back!",
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -34,25 +33,7 @@ class _RegisterState extends State<Register> {
                     fontStyle: FontStyle.normal),
               ),
               const SizedBox(
-                height: 120,
-              ),
-              SizedBox(
-                width: 370,
-                height: 60,
-                child: TextField(
-                  controller: fullname,
-                  decoration: InputDecoration(
-                      hintText: "Full Name",
-                      hintMaxLines: 1,
-                      focusedBorder: UIViews.inputBorder(radius: 15),
-                      disabledBorder: UIViews.inputBorder(radius: 15),
-                      enabledBorder: UIViews.inputBorder(radius: 15),
-                      hintStyle: const TextStyle(
-                          color: Color.fromARGB(255, 67, 66, 66),
-                          fontSize: 16)),
-                  maxLines: 1,
-                  minLines: 1,
-                ),
+                height: 160,
               ),
               const SizedBox(
                 height: 10,
@@ -145,13 +126,13 @@ class _RegisterState extends State<Register> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Already a user?",
+                    "New user?",
                     style: TextStyle(fontSize: 18),
                   ),
                   TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Login Here",
+                        "Register Here",
                         style: TextStyle(fontSize: 18),
                       )),
                 ],

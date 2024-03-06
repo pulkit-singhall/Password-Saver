@@ -10,7 +10,7 @@ const queryRoute = express.Router();
 
 queryRoute.route("/create/:passwordId").post(createQuery);
 queryRoute.route("/delete/:queryId").delete(deleteQuery);
-queryRoute.route("/update/:queryId").patch(createQuery);
+queryRoute.route("/update/:queryId").patch(updateQuery);
 queryRoute.route("/get-queries/:passwordId").get(getPasswordQueries);
 
 export { queryRoute };

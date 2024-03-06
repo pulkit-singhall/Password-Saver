@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:password_saver/screens/login.dart';
+import 'package:password_saver/screens/dashboard.screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +15,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Colors.blue.shade300,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+        ),
       ),
-      home: const Login(),
+      home: const Dashboard(),
     );
   }
 }

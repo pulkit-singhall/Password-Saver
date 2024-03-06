@@ -11,6 +11,6 @@ const passwordRoute = express.Router();
 passwordRoute.route("/create").post(createPassword);
 passwordRoute.route("/delete/:passwordId").delete(deletePassword);
 passwordRoute.route("/update/:passwordId").patch(updatePassword);
-passwordRoute.route("/get-passwords/:userId").get(getAllUserPasswords);
+passwordRoute.route("/get-passwords").get(getAllUserPasswords);
 
 export { passwordRoute };
