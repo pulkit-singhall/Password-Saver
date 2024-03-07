@@ -1,4 +1,3 @@
-import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { User } from "../models/user.model.js";
@@ -11,7 +10,7 @@ dotenv.config();
 
 const cryptr = new Cryptr(`${process.env.CRYPTR_SECRET_KEY}`);
 
-const createPassword = asyncHandler(async (req, res) => {
+const createPassword = async (req, res) => {
     const { title, description, value, pin } = req.body;
     const user = req.user;
 
@@ -90,7 +89,7 @@ const createPassword = asyncHandler(async (req, res) => {
                 "New Password Saved"
             )
         );
-});
+};
 
 const deletePassword = asyncHandler(async (req, res) => {
     const { passwordId } = req.params;
