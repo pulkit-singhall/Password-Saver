@@ -41,7 +41,7 @@ passwordSchema.pre("save", async function (next) {
     if (this.isModified("value")) {
         this.value = cryptr.encrypt(this.value);
     }
-    if (this.isModified("pin")) {
+    if (this.isModified("pin") && this.pin.length > 0) {
         this.pin = cryptr.encrypt(this.pin);
     }
     next();
