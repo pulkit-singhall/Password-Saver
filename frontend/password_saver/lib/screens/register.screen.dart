@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:password_saver/controllers/user.controller.dart';
+import 'package:password_saver/routes/route.dart';
 import 'package:password_saver/widgets/views.widgets.dart';
 
-class Register extends StatefulWidget {
+class Register extends ConsumerStatefulWidget {
   const Register({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  ConsumerState<Register> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends ConsumerState<Register> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController fullname = TextEditingController();
@@ -16,6 +19,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    final userController = ref.watch(userControllerProvider.notifier);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -118,6 +122,11 @@ class _RegisterState extends State<Register> {
                     ElevatedButton(
                         onPressed: () {
                           // register action
+                          userController.registerUser(
+                              email: email.text.toString(),
+                              password: password.text.toString(),
+                              fullname: fullname.text.toString(),
+                              context: context);
                         },
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all<Size>(
@@ -149,7 +158,9 @@ class _RegisterState extends State<Register> {
                     style: TextStyle(fontSize: 18),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, Routes.loginRoute());
+                      },
                       child: const Text(
                         "Login Here",
                         style: TextStyle(fontSize: 18),

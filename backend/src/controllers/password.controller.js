@@ -161,7 +161,7 @@ const deletePassword = async (req, res) => {
     }
 };
 
-const updatePassword = asyncHandler(async (req, res) => {
+const updatePassword = async (req, res) => {
     const { passwordId } = req.params;
     const user = req.user;
 
@@ -179,9 +179,9 @@ const updatePassword = asyncHandler(async (req, res) => {
     if (!user._id.equals(owner)) {
         throw new ApiError(406, "User cant update this password");
     }
-});
+};
 
-const getAllUserPasswords = asyncHandler(async (req, res) => {
+const getAllUserPasswords = async (req, res) => {
     try {
         const user = req.user;
         const userId = user._id;
@@ -232,6 +232,6 @@ const getAllUserPasswords = asyncHandler(async (req, res) => {
             statusCode: error.statusCode,
         });
     }
-});
+};
 
 export { createPassword, deletePassword, updatePassword, getAllUserPasswords };

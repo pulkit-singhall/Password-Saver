@@ -1,6 +1,6 @@
 class PasswordEndPoints {
   // base URL
-  static String basePasswordUrl = 'https://localhost:3000/api/v1/passwords';
+  static String basePasswordUrl = 'http://localhost:3000/api/v1/passwords';
 
   static String createUrl = '$basePasswordUrl/create';
   static String deleteUrl = '$basePasswordUrl/delete';

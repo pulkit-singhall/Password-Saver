@@ -1,6 +1,6 @@
 class UserEndPoints {
   // base URL
-  static String baseUserUrl = 'https://localhost:3000/api/v1/users';
+  static String baseUserUrl = 'http://localhost:3000/api/v1/users';
 
   static String loginUrl = '$baseUserUrl/login';
   static String registerUrl = '$baseUserUrl/register';

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:password_saver/screens/dashboard.screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:password_saver/screens/register.screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      home: const Dashboard(),
+      home: const Register(),
     );
   }
 }

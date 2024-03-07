@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:password_saver/controllers/user.controller.dart';
 import 'package:password_saver/widgets/views.widgets.dart';
 
-class Login extends StatefulWidget {
+class Login extends ConsumerStatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  ConsumerState<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends ConsumerState<Login> {
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
   int isObscure = 1;
 
   @override
   Widget build(BuildContext context) {
+    final userController = ref.watch(userControllerProvider.notifier);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -98,7 +101,12 @@ class _LoginState extends State<Login> {
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          // register action
+                          // login action
+                          userController.loginUser(
+                              password: password.text.toString(),
+                              email: email.text.toString(),
+                              context: context,
+                              ref: ref);
                         },
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all<Size>(
@@ -130,7 +138,9 @@ class _LoginState extends State<Login> {
                     style: TextStyle(fontSize: 18),
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         "Register Here",
                         style: TextStyle(fontSize: 18),
