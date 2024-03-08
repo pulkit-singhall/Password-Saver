@@ -22,6 +22,15 @@ abstract class IUserAPI {
     required String email,
     required String password,
   });
+
+  // verify user auth
+  Future<Map<String, dynamic>> verifyUser(
+      {required String accessToken, required String refreshToken});
+
+  // get current user
+  Future<Map<String, dynamic>> getCurrentUser({required String accessToken});
+
+  Future<Map<String, dynamic>> logoutUser({required String accessToken});
 }
 
 class UserAPI implements IUserAPI {
@@ -49,6 +58,34 @@ class UserAPI implements IUserAPI {
       "password": password,
     };
     final response = await http.post(Uri.parse(reqUrl), body: reqBody);
+    return jsonDecode(response.body);
+  }
+
+  @override
+  Future<Map<String, dynamic>> verifyUser(
+      {required String accessToken, required String refreshToken}) async {
+    final reqUrl = UserEndPoints.verifyUserUrl;
+    final reqBody = {"refreshToken": refreshToken};
+    final reqHeaders = {"Authorization": "Bearer $accessToken"};
+    final response =
+        await http.post(Uri.parse(reqUrl), body: reqBody, headers: reqHeaders);
+    return jsonDecode(response.body);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getCurrentUser(
+      {required String accessToken}) async {
+    final reqUrl = UserEndPoints.currentUserUrl;
+    final reqHeaders = {"Authorization": "Bearer $accessToken"};
+    final response = await http.get(Uri.parse(reqUrl), headers: reqHeaders);
+    return jsonDecode(response.body);
+  }
+
+  @override
+  Future<Map<String, dynamic>> logoutUser({required String accessToken}) async {
+    final reqUrl = UserEndPoints.logoutUrl;
+    final reqHeaders = {"Authorization": "Bearer $accessToken"};
+    final response = await http.post(Uri.parse(reqUrl), headers: reqHeaders);
     return jsonDecode(response.body);
   }
 }

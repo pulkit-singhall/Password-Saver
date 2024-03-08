@@ -5,12 +5,13 @@ import {
     deleteQuery,
     getPasswordQueries,
 } from "../controllers/query.controller.js";
+import { verifyUser } from '../middlewares/auth.middleware.js';
 
 const queryRoute = express.Router();
 
-queryRoute.route("/create/:passwordId").post(createQuery);
-queryRoute.route("/delete/:queryId").delete(deleteQuery);
-queryRoute.route("/update/:queryId").patch(updateQuery);
-queryRoute.route("/get-queries/:passwordId").get(getPasswordQueries);
+queryRoute.route("/create/:passwordId").post(verifyUser,createQuery);
+queryRoute.route("/delete/:queryId").delete(verifyUser,deleteQuery);
+queryRoute.route("/update/:queryId").patch(verifyUser,updateQuery);
+queryRoute.route("/get-queries/:passwordId").get(verifyUser,getPasswordQueries);
 
 export { queryRoute };

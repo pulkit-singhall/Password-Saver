@@ -52,4 +52,67 @@ class UserController extends StateNotifier<bool> {
       print("Error in login: ${jsonResponse['error']}");
     }
   }
+
+  Future<bool> verifyUser({required WidgetRef ref}) async {
+    final accessToken = ref.watch(userAccessTokenProvider);
+    final refreshToken = ref.watch(userRefreshTokenProvider);
+    final jsonResponse = await userAPI.verifyUser(
+        accessToken: accessToken, refreshToken: refreshToken);
+    final success = jsonResponse['success'];
+    if (success == "false") {
+      return false;
+    }
+    final statusCode = jsonResponse['statusCode'];
+    if (statusCode == 201) {
+      // tokens refreshed
+      final newAccessToken = jsonResponse['data']['newAccessToken'];
+      final newRefreshToken = jsonResponse['data']['newRefreshToken'];
+      final userTokenController = ref.watch(userTokenProvider.notifier);
+      userTokenController.updateAccessToken(
+          incomingAccessToken: newAccessToken);
+      userTokenController.updateRefreshToken(
+          incomingRefreshToken: newRefreshToken);
+    }
+    return true;
+  }
+
+  Future<Map<String, dynamic>> getCurrentUser(
+      {required WidgetRef ref, required BuildContext context}) async {
+    final result = await verifyUser(ref: ref);
+    if (!result) {
+      Navigator.pushReplacement(context, Routes.registerRoute());
+      return {};
+    }
+    final accessToken = ref.watch(userAccessTokenProvider);
+    final jsonResponse = await userAPI.getCurrentUser(accessToken: accessToken);
+    return jsonResponse;
+  }
+
+  Future<void> logoutUser(
+      {required WidgetRef ref, required BuildContext context}) async {
+    final result = await verifyUser(ref: ref);
+    final userTokenController = ref.watch(userTokenProvider.notifier);
+    if(result){
+      final accessToken = ref.watch(userAccessTokenProvider);
+      final jsonResponse = await userAPI.logoutUser(accessToken: accessToken);
+      final success = jsonResponse['success'];
+      if (success == "true") {
+        userTokenController.updateAccessToken(
+            incomingAccessToken: 'accessToken');
+        userTokenController.updateRefreshToken(
+            incomingRefreshToken: 'refreshToken');
+        Navigator.pushReplacement(context, Routes.registerRoute());
+      } else {
+        final error = jsonResponse['error'];
+        print('Error in logout $error');
+      }
+    }
+    else{
+      userTokenController.updateAccessToken(
+            incomingAccessToken: 'accessToken');
+        userTokenController.updateRefreshToken(
+            incomingRefreshToken: 'refreshToken');
+      Navigator.pushReplacement(context, Routes.registerRoute());
+    }
+  }
 }

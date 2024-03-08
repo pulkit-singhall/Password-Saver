@@ -8,4 +8,5 @@ class UserEndPoints {
   static String currentUserUrl = '$baseUserUrl/current-user';
   static String changePasswordUrl = '$baseUserUrl/change-password';
   static String changeAvatarUrl = '$baseUserUrl/change-avatar';
+  static String verifyUserUrl = '$baseUserUrl/verify-user';
 }

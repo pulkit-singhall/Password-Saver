@@ -17,8 +17,8 @@ final userRefreshTokenProvider = Provider((ref) {
 class UserTokens extends StateNotifier<bool> {
   UserTokens() : super(false);
 
-  String accessToken = '';
-  String refreshToken = '';
+  String accessToken = 'accessToken';
+  String refreshToken = 'refreshToken';
 
   void updateAccessToken({required String incomingAccessToken}) {
     accessToken = incomingAccessToken;
