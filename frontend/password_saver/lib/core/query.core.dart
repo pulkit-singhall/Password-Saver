@@ -1,9 +1,9 @@
-class PasswordEndPoints {
+class QueryEndPoints {
   // base URL
-  static String basePasswordUrl = 'http://localhost:3000/api/v1/passwords';
+  static String baseQueryUrl = 'http://localhost:3000/api/v1/queries';
 
-  static String createUrl = '$basePasswordUrl/create';
-  static String deleteUrl = '$basePasswordUrl/delete';
-  static String updateUrl = '$basePasswordUrl/update';
-  static String getPasswordQueriesUrl = '$basePasswordUrl/get-queries';
+  static String createUrl = '$baseQueryUrl/create';
+  static String deleteUrl = '$baseQueryUrl/delete';
+  static String updateUrl = '$baseQueryUrl/update';
+  static String getPasswordQueriesUrl = '$baseQueryUrl/get-queries';
 }

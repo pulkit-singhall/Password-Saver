@@ -4,9 +4,7 @@ import 'package:password_saver/core/user.core.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod/riverpod.dart';
 
-final userApiProvider = Provider((ref) {
-  return UserAPI();
-});
+final userApiProvider = Provider((ref) => UserAPI());
 
 abstract class IUserAPI {
   // abstract api calls
