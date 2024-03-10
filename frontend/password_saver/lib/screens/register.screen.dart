@@ -45,6 +45,7 @@ class _RegisterState extends ConsumerState<Register> {
                 height: 60,
                 child: TextField(
                   controller: fullname,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                       hintText: "Full Name",
                       hintMaxLines: 1,
@@ -66,6 +67,7 @@ class _RegisterState extends ConsumerState<Register> {
                 height: 60,
                 child: TextField(
                   controller: email,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       hintText: "Email",
                       hintMaxLines: 1,
@@ -87,6 +89,7 @@ class _RegisterState extends ConsumerState<Register> {
                 height: 60,
                 child: TextField(
                   controller: password,
+                  keyboardType: TextInputType.text,
                   obscureText: isObscure == 1 ? true : false,
                   decoration: InputDecoration(
                       suffixIcon: IconButton(

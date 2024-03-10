@@ -46,6 +46,7 @@ class _LoginState extends ConsumerState<Login> {
                 height: 60,
                 child: TextField(
                   controller: email,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                       hintText: "Email",
                       hintMaxLines: 1,
@@ -67,6 +68,7 @@ class _LoginState extends ConsumerState<Login> {
                 height: 60,
                 child: TextField(
                   controller: password,
+                  keyboardType: TextInputType.text,
                   obscureText: isObscure == 1 ? true : false,
                   decoration: InputDecoration(
                       suffixIcon: IconButton(
