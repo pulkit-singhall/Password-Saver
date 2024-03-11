@@ -15,6 +15,9 @@ abstract class IPasswordAPI {
       required String accessToken});
 
   Future<Map<String, dynamic>> getUserPasswords({required String accessToken});
+
+  Future<String> deletePassword(
+      {required String accessToken, required String passwordID});
 }
 
 class PasswordAPI implements IPasswordAPI {
@@ -45,5 +48,15 @@ class PasswordAPI implements IPasswordAPI {
     final reqHeaders = {"Authorization": "Bearer $accessToken"};
     final response = await http.get(Uri.parse(reqUrl), headers: reqHeaders);
     return jsonDecode(response.body);
+  }
+
+  @override
+  Future<String> deletePassword(
+      {required String accessToken, required String passwordID}) async {
+    final reqUrl = '${PasswordEndPoints.deleteUrl}/$passwordID';
+    final reqHeaders = {"Authorization": "Bearer $accessToken"};
+    final response = await http.delete(Uri.parse(reqUrl), headers: reqHeaders);
+    final body = jsonDecode(response.body);
+    return body['success'];
   }
 }

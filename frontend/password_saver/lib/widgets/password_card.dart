@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:password_saver/controllers/password.controller.dart';
 
-class PasswordCard extends StatefulWidget {
+class PasswordCard extends ConsumerStatefulWidget {
   final dynamic password;
   const PasswordCard({super.key, required this.password});
 
   @override
-  State<PasswordCard> createState() => _PasswordCardState();
+  ConsumerState<PasswordCard> createState() => _PasswordCardState();
 }
 
-class _PasswordCardState extends State<PasswordCard> {
+class _PasswordCardState extends ConsumerState<PasswordCard> {
   @override
   Widget build(BuildContext context) {
+    final passwordController = ref.watch(passwordControllerProvider.notifier);
     final title = widget.password['title'];
     final description = widget.password['description'];
     final date = widget.password['createdAt'];
+    final id = widget.password['_id'];
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
@@ -51,6 +55,8 @@ class _PasswordCardState extends State<PasswordCard> {
                           child: TextButton(
                               onPressed: () {
                                 // delete password
+                                passwordController.deletePassword(
+                                    passwordID: id, ref: ref, context: context);
                               },
                               child: const Text('Delete'))),
                       DropdownMenuItem(

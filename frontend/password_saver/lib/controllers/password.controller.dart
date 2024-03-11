@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,6 +59,26 @@ class PasswordController extends StateNotifier<bool> {
     } else {
       Navigator.pushReplacement(context, Routes.registerRoute());
       return [];
+    }
+  }
+
+  Future<void> deletePassword(
+      {required String passwordID,
+      required WidgetRef ref,
+      required BuildContext context}) async {
+    final userController = ref.watch(userControllerProvider.notifier);
+    final result = await userController.verifyUser(ref: ref);
+    if (result) {
+      final accessToken = ref.watch(userAccessTokenProvider);
+      final success = await passwordApi.deletePassword(
+          accessToken: accessToken, passwordID: passwordID);
+      if (success == "true") {
+        print('Password Deleted');
+      } else {
+        print('Password not deleted');
+      }
+    } else {
+      Navigator.pushReplacement(context, Routes.registerRoute());
     }
   }
 }
