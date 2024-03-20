@@ -92,7 +92,7 @@ class UserController extends StateNotifier<bool> {
       {required WidgetRef ref, required BuildContext context}) async {
     final result = await verifyUser(ref: ref);
     final userTokenController = ref.watch(userTokenProvider.notifier);
-    if(result){
+    if (result) {
       final accessToken = ref.watch(userAccessTokenProvider);
       final jsonResponse = await userAPI.logoutUser(accessToken: accessToken);
       final success = jsonResponse['success'];
@@ -106,13 +106,31 @@ class UserController extends StateNotifier<bool> {
         final error = jsonResponse['error'];
         print('Error in logout $error');
       }
-    }
-    else{
-      userTokenController.updateAccessToken(
-            incomingAccessToken: 'accessToken');
-        userTokenController.updateRefreshToken(
-            incomingRefreshToken: 'refreshToken');
+    } else {
+      userTokenController.updateAccessToken(incomingAccessToken: 'accessToken');
+      userTokenController.updateRefreshToken(
+          incomingRefreshToken: 'refreshToken');
       Navigator.pushReplacement(context, Routes.registerRoute());
     }
   }
+
+  Future<void> changeCurrentPassword(
+      {required WidgetRef ref,
+      required BuildContext context,
+      required String oldPassword,
+      required String newPassword}) async {
+    final result = await verifyUser(ref: ref);
+    if (result) {
+      final accessToken = ref.watch(userAccessTokenProvider);
+      await userAPI.changeCurrentPassword(
+          accessToken: accessToken,
+          oldPassword: oldPassword,
+          newPassword: newPassword);
+      Navigator.pop(context);
+    } else {
+      Navigator.pushReplacement(context, Routes.registerRoute());
+    }
+  }
+
+
 }

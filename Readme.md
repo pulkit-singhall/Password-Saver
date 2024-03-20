@@ -1,6 +1,6 @@
 # Password Saver Project
 
-This is an application where you can easily save passwords or login credentials for various other websites.\
+This is an application where you can easily save passwords or login credentials for various other websites.
 
 # Features of the Application
 - saving passwords 
@@ -12,6 +12,7 @@ This is an application where you can easily save passwords or login credentials 
 # Frontend of the Application 
 - Flutter
 - Dart
+- Riverpod
 
 # Backend of the Application
 - Node.js
@@ -21,6 +22,7 @@ This is an application where you can easily save passwords or login credentials 
 # Other Technologies Used
 - JWT Authentication
 - Bcrypt 
+- Cryptr
 - Multer
 - Cloudinary
 - MongoDB Aggregation Pipelines

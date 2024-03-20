@@ -28,7 +28,14 @@ abstract class IUserAPI {
   // get current user
   Future<Map<String, dynamic>> getCurrentUser({required String accessToken});
 
+  // logout user
   Future<Map<String, dynamic>> logoutUser({required String accessToken});
+
+  // change current password
+  Future<Map<String, dynamic>> changeCurrentPassword(
+      {required String accessToken,
+      required String oldPassword,
+      required String newPassword});
 }
 
 class UserAPI implements IUserAPI {
@@ -84,6 +91,19 @@ class UserAPI implements IUserAPI {
     final reqUrl = UserEndPoints.logoutUrl;
     final reqHeaders = {"Authorization": "Bearer $accessToken"};
     final response = await http.post(Uri.parse(reqUrl), headers: reqHeaders);
+    return jsonDecode(response.body);
+  }
+
+  @override
+  Future<Map<String, dynamic>> changeCurrentPassword(
+      {required String accessToken,
+      required String oldPassword,
+      required String newPassword}) async {
+    final reqUrl = UserEndPoints.changePasswordUrl;
+    final reqBody = {"oldPassword": oldPassword, "newPassword": newPassword};
+    final reqHeaders = {"Authorization": "Bearer $accessToken"};
+    final response =
+        await http.patch(Uri.parse(reqUrl), body: reqBody, headers: reqHeaders);
     return jsonDecode(response.body);
   }
 }

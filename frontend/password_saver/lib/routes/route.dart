@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:password_saver/screens/dashboard.screen.dart';
 import 'package:password_saver/screens/login.screen.dart';
 import 'package:password_saver/screens/password.screen.dart';
+import 'package:password_saver/screens/profile.screen.dart';
 import 'package:password_saver/screens/register.screen.dart';
 
 class Routes {
@@ -26,6 +27,12 @@ class Routes {
   static MaterialPageRoute passwordRoute() {
     return MaterialPageRoute(builder: (builder) {
       return const Password();
+    });
+  }
+
+  static MaterialPageRoute proffileRoute() {
+    return MaterialPageRoute(builder: (builder) {
+      return const Profile();
     });
   }
 }

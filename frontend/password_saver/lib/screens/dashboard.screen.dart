@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:password_saver/controllers/password.controller.dart';
-import 'package:password_saver/controllers/user.controller.dart';
+//import 'package:password_saver/controllers/user.controller.dart';
 import 'package:password_saver/routes/route.dart';
 import 'package:password_saver/widgets/password_card.dart';
 
@@ -15,23 +15,23 @@ class Dashboard extends ConsumerStatefulWidget {
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    final userController = ref.watch(userControllerProvider.notifier);
+    //final userController = ref.watch(userControllerProvider.notifier);
     final passwordController = ref.watch(passwordControllerProvider.notifier);
     final userPasswords =
         passwordController.getUserPasswords(ref: ref, context: context);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            userController.getCurrentUser(ref: ref, context: context);
-          },
-          icon: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            child: Icon(
-              Icons.person_3,
-              color: Colors.black,
-              size: 35,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Icon(
+                Icons.menu_rounded,
+                color: Colors.black,
+                size: 30,
+              ),
             ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
         title: const Text(
@@ -85,6 +85,42 @@ class _DashboardState extends ConsumerState<Dashboard> {
               ),
             );
           },
+        ),
+      ),
+      drawer: Drawer(
+        elevation: 2,
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset(
+                    'assets/images/lock.png',
+                    height: 120,
+                    width: 120,
+                    alignment: Alignment.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                TextButton(
+                  child: const Text(
+                    'Profile',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.push(context, Routes.proffileRoute());
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
